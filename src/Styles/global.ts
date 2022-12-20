@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
-const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle`
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -33,12 +33,20 @@ body {
 	color: ${({ theme }) => theme.colors['base-text']};
 	-webkit-font-smoothing: antialiased;
 }
+
+body, input, textarea, button {
+	font-family: ${({ theme }) => theme.fonts.regular};
+	font-weight: 400;
+	font-size: ${({ theme }) => theme.textSizes['text-regular-s']};
+}
+
 ol, ul {
 	list-style: none;
 }
 blockquote, q {
 	quotes: none;
 }
+
 blockquote:before, blockquote:after,
 q:before, q:after {
 	content: '';
