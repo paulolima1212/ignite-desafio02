@@ -21,7 +21,11 @@ export function SelectedCoffees() {
         })}
 
         <TotalOrderSection />
-        <Button text='Confirm order' disabled={cartItems.length === 0} />
+        <Button
+          type='submit'
+          text='Confirm order'
+          disabled={cartItems.length === 0}
+        />
       </DetailsContainer>
     </SelectedCoffeesContainer>
   );

@@ -8,6 +8,7 @@ import { PaymentOptions } from './Paymentoptions';
 
 export function CheckoutForm() {
   const { colors } = useTheme();
+
   return (
     <CheckoutFormContainer>
       <TitleText size='xs' color='subtitle'>

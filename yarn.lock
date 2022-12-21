@@ -2340,7 +2340,7 @@
     "loose-envify" "^1.1.0"
     "scheduler" "^0.23.0"
 
-"react-hook-form@^7.0.0", "react-hook-form@^7.40.0":
+"react-hook-form@^7.0.0", "react-hook-form@^7.41.0":
   "integrity" "sha512-u1cHOXujr+AsNBoeCtcCuRwPh87mXAgKtXqd3qTCBgNFYzVZLXjYgLcynORpAgqhe24r5scucR8+6gfWaXBtHQ=="
   "resolved" "https://registry.npmjs.org/react-hook-form/-/react-hook-form-7.41.0.tgz"
   "version" "7.41.0"
@@ -3013,7 +3013,7 @@
   "resolved" "https://registry.npmjs.org/yocto-queue/-/yocto-queue-0.1.0.tgz"
   "version" "0.1.0"
 
-"zod@^3.19.1":
+"zod@^3.20.2":
   "integrity" "sha512-1MzNQdAvO+54H+EaK5YpyEy0T+Ejo/7YLHS93G3RnYWh5gaotGHwGeN/ZO687qEDU2y4CdStQYXVHIgrUl5UVQ=="
   "resolved" "https://registry.npmjs.org/zod/-/zod-3.20.2.tgz"
   "version" "3.20.2"
