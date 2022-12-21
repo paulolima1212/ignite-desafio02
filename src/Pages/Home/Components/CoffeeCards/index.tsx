@@ -11,8 +11,46 @@ import {
   Tags,
 } from './styles';
 import { formatNumber } from '../../../../Utils/format';
+import { useCartContext } from '../../../../Hooks/useCartContext';
+import { useState } from 'react';
 
-export function CoffeeCards() {
+export interface Coffee {
+  id: number;
+  tags: string[];
+  name: string;
+  description: string;
+  photo: string;
+  price: number;
+}
+
+interface CoffeeProps {
+  coffee: Coffee;
+}
+
+export function CoffeeCards({ coffee }: CoffeeProps) {
+  const { addCoffeeToCart } = useCartContext();
+  const [quantity, setQuantity] = useState(1);
+
+  function handleAddCoffeeToCart() {
+    const coffeeToAdd = {
+      ...coffee,
+      quantity,
+    };
+
+    addCoffeeToCart(coffeeToAdd);
+  }
+
+  function handleIncrease() {
+    setQuantity((prev) => prev + 1);
+  }
+
+  function handleDecrease() {
+    if (quantity === 1) {
+      return null;
+    }
+    setQuantity((prev) => prev - 1);
+  }
+
   return (
     <CoffeeCardsContainer>
       <img
@@ -20,22 +58,26 @@ export function CoffeeCards() {
         alt=''
       />
       <Tags>
-        <span>Tradicional</span>
+        {coffee.tags.map((tag) => {
+          return <span>{tag}</span>;
+        })}
       </Tags>
-      <NameCoffee>Tradicional</NameCoffee>
-      <DescriptionCoffee>
-        O tradicional café feito com água quente e grãos moídos
-      </DescriptionCoffee>
+      <NameCoffee>{coffee.name}</NameCoffee>
+      <DescriptionCoffee>{coffee.description}</DescriptionCoffee>
       <CardFooterContainer>
         <div>
           <RegularText size='s'>R$</RegularText>
           <TitleText size='m' color='text' as='strong'>
-            {formatNumber.format(9.9)}
+            {formatNumber.format(coffee.price)}
           </TitleText>
         </div>
         <AddCartWrapper>
-          <QuantityInput />
-          <button>
+          <QuantityInput
+            onIncrease={handleIncrease}
+            onDecrease={handleDecrease}
+            quantity={quantity}
+          />
+          <button onClick={handleAddCoffeeToCart}>
             <ShoppingCart weight='fill' size={22} />
           </button>
         </AddCartWrapper>

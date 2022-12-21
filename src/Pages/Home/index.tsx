@@ -1,7 +1,9 @@
-import { CoffeeCards } from './Components/CoffeCards';
+import { CoffeeCards } from './Components/CoffeeCards';
 import { Intro } from './Components/Intro';
 import { OurCoffees } from './Components/OurCoffees';
 import { CoffeeListContainer, HomeContainer } from './styles';
+
+import { coffees } from '../../Data/coffees';
 
 export function HomePage() {
   return (
@@ -9,14 +11,9 @@ export function HomePage() {
       <Intro />
       <OurCoffees />
       <CoffeeListContainer className='container'>
-        <CoffeeCards />
-        <CoffeeCards />
-        <CoffeeCards />
-        <CoffeeCards />
-        <CoffeeCards />
-        <CoffeeCards />
-        <CoffeeCards />
-        <CoffeeCards />
+        {coffees.map((coffee) => {
+          return <CoffeeCards coffee={coffee} key={coffee.id} />;
+        })}
       </CoffeeListContainer>
     </HomeContainer>
   );
