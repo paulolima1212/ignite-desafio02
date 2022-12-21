@@ -10,6 +10,7 @@ import {
   NameCoffee,
   Tags,
 } from './styles';
+import { formatNumber } from '../../../../Utils/format';
 
 export function CoffeeCards() {
   return (
@@ -29,7 +30,7 @@ export function CoffeeCards() {
         <div>
           <RegularText size='s'>R$</RegularText>
           <TitleText size='m' color='text' as='strong'>
-            9.90
+            {formatNumber.format(9.9)}
           </TitleText>
         </div>
         <AddCartWrapper>

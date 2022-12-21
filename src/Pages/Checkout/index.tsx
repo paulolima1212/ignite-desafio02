@@ -1,7 +1,12 @@
+import { MapPin, MapPinLine } from 'phosphor-react';
+import { CheckoutForm } from './Components/CheckoutForm';
+import { SectionTitle } from './Components/SectionTitle';
+import { CheckoutContainer } from './styles';
+
 export function CheckoutPage() {
   return (
-    <div>
-      <h1>Checkout</h1>
-    </div>
+    <CheckoutContainer className='container'>
+      <CheckoutForm />
+    </CheckoutContainer>
   );
 }
