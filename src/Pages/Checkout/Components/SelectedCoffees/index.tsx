@@ -1,10 +1,14 @@
 import { Button } from '../../../../Components/Button';
 import { TitleText } from '../../../../Components/Typography';
+import { useCartContext } from '../../../../Hooks/useCartContext';
+import { CoffeeCards } from '../../../Home/Components/CoffeeCards';
 import { CardCoffeeCart } from '../CardCoffeeCart';
 import { TotalOrderSection } from './TotalOrderSection';
 import { DetailsContainer, SelectedCoffeesContainer } from './styles';
 
 export function SelectedCoffees() {
+  const { cartItems } = useCartContext();
+
   return (
     <SelectedCoffeesContainer>
       <TitleText size='xs' color='subtitle'>
@@ -12,13 +16,12 @@ export function SelectedCoffees() {
       </TitleText>
 
       <DetailsContainer>
-        <CardCoffeeCart />
-        <CardCoffeeCart />
-        <CardCoffeeCart />
-        <CardCoffeeCart />
+        {cartItems.map((cartItem) => {
+          return <CardCoffeeCart coffee={cartItem} key={cartItem.id} />;
+        })}
 
         <TotalOrderSection />
-        <Button text='Confirm order' />
+        <Button text='Confirm order' disabled={cartItems.length === 0} />
       </DetailsContainer>
     </SelectedCoffeesContainer>
   );
