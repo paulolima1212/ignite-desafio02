@@ -33,13 +33,13 @@ export function AddressForm() {
       <Input
         placeholder='Number'
         className='number'
-        type='number'
         {...register('number')}
         error={errors.number?.message}
       />
       <Input
         placeholder='Complement'
         className='complement'
+        rightText='optional'
         {...register('complement')}
         error={errors.complement?.message}
       />
