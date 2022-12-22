@@ -9,9 +9,41 @@ import motorcycleImg from '../../assets/motorcycle.svg';
 import { InfoWithIcon } from '../../Components/InfoWithIcon';
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react';
 import { useTheme } from 'styled-components';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Coffee } from '../Home/Components/CoffeeCards';
+import { useEffect } from 'react';
+
+interface DataOrderProps {
+  state: {
+    city: string;
+    coffee: Coffee[];
+    complement: string;
+    district: string;
+    number: string;
+    paymentMethod: string;
+    street: string;
+    uf: string;
+    zipCode: string;
+  };
+}
 
 export function SuccessPage() {
   const { colors } = useTheme();
+
+  const { state } = useLocation() as unknown as DataOrderProps;
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!state) {
+      navigate('/');
+    }
+  }, []);
+
+  if (!state) {
+    return <></>;
+  }
+
   return (
     <SuccessContainer className='container'>
       <div>
@@ -30,7 +62,8 @@ export function SuccessPage() {
             iconColor={colors['brand-purple-dark']}
             text={
               <p>
-                Delivery on <strong>John Daniel Street</strong>, number 102
+                Delivery on <strong>{state.street}</strong>, number{' '}
+                {state.number}
               </p>
             }
           />
@@ -50,7 +83,7 @@ export function SuccessPage() {
             text={
               <p>
                 Payment on arrives <br />
-                <strong>Credit card</strong>
+                <strong>{state.paymentMethod}</strong>
               </p>
             }
           />
