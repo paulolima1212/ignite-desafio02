@@ -4,6 +4,13 @@ import { SelectedCoffees } from './Components/SelectedCoffees';
 import * as zod from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, FormProvider } from 'react-hook-form';
+import { useCartContext } from '../../Hooks/useCartContext';
+
+enum PaymentMethod {
+  credit = 'credit',
+  debit = 'debit',
+  money = 'money',
+}
 
 const checkoutFormValidatorSchema = zod.object({
   zipCode: zod.string().min(1, 'Zip-code is required. Please type this field'),
@@ -13,6 +20,11 @@ const checkoutFormValidatorSchema = zod.object({
   district: zod.string().min(1, 'Fill this field'),
   city: zod.string().min(1, 'Fill this field'),
   uf: zod.string().min(1, 'Fill this field'),
+  paymentMethod: zod.nativeEnum(PaymentMethod, {
+    errorMap: () => {
+      return { message: 'Select a paymentMethods' };
+    },
+  }),
 });
 
 export type OrderData = zod.infer<typeof checkoutFormValidatorSchema>;
@@ -20,6 +32,8 @@ export type OrderData = zod.infer<typeof checkoutFormValidatorSchema>;
 type ConfirmOrderFormData = OrderData;
 
 export function CheckoutPage() {
+  const { cartItems, clearCartItems } = useCartContext();
+
   const checkoutForm = useForm<ConfirmOrderFormData>({
     resolver: zodResolver(checkoutFormValidatorSchema),
   });
@@ -27,7 +41,12 @@ export function CheckoutPage() {
   const { handleSubmit, reset } = checkoutForm;
 
   function handleConfirmOrder(data: ConfirmOrderFormData) {
-    console.log(data);
+    const newData = {
+      ...data,
+      coffee: cartItems,
+    };
+    console.log(newData);
+    clearCartItems();
     reset();
   }
 

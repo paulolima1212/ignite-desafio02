@@ -12,6 +12,7 @@ interface CartContextProps {
   cartItemsTotal: number;
   addCoffeeToCart: (coffee: CartItem) => void;
   removeItemInCart: (cartItemId: number) => void;
+  clearCartItems: () => void;
   quantityCartItemQuantity: (
     cartItemId: number,
     type: 'increase' | 'decrease'
@@ -53,6 +54,10 @@ export function CartContextProvider({ children }: { children: ReactNode }) {
     });
 
     setCartItems(newCart);
+  }
+
+  function clearCartItems() {
+    setCartItems([]);
   }
 
   function quantityCartItemQuantity(
@@ -101,6 +106,7 @@ export function CartContextProvider({ children }: { children: ReactNode }) {
         addCoffeeToCart,
         quantityCartItemQuantity,
         removeItemInCart,
+        clearCartItems,
       }}
     >
       {children}
